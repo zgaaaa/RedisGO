@@ -12,7 +12,7 @@ import (
 )
 
 // hash.go file implements the hash commands of redis
-func hDelHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hDelHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hdel" {
 		logger.Error("hDelHash: command Names is not hdel")
 		return resp.MakeErrorData("server error")
@@ -51,7 +51,7 @@ func hDelHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeIntData(int64(res))
 }
 
-func hExistsHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hExistsHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hexists" {
 		logger.Error("hExistsHash: command Names is not hexists")
 		return resp.MakeErrorData("server error")
@@ -85,7 +85,7 @@ func hExistsHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) res
 	return resp.MakeIntData(0)
 }
 
-func hGetHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hGetHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hget" {
 		logger.Error("hGetHash: command Names is not hget")
 		return resp.MakeErrorData("server error")
@@ -118,7 +118,7 @@ func hGetHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeBulkData(res)
 }
 
-func hGetAllHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hGetAllHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hgetall" {
 		logger.Error("hGetAllHash: command Names is not hgetall")
 		return resp.MakeErrorData("server error")
@@ -153,7 +153,7 @@ func hGetAllHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) res
 	return resp.MakeArrayData(res)
 }
 
-func hIncrByHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hIncrByHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hincrby" {
 		logger.Error("hIncrByHash: command Names is not hincrby")
 		return resp.MakeErrorData("server error")
@@ -196,7 +196,7 @@ func hIncrByHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) res
 	return resp.MakeIntData(int64(res))
 }
 
-func hIncrByFloatHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hIncrByFloatHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hincrbyfloat" {
 		logger.Error("hIncrByFloatHash: command Names is not hincrbyfloat")
 		return resp.MakeErrorData("server error")
@@ -236,7 +236,7 @@ func hIncrByFloatHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn
 	return resp.MakeBulkData([]byte(strconv.FormatFloat(res, 'f', -1, 64)))
 }
 
-func hKeysHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hKeysHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hkeys" {
 		logger.Error("hKeysHash: command Names is not hkeys")
 		return resp.MakeErrorData("server error")
@@ -270,7 +270,7 @@ func hKeysHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeArrayData(res)
 }
 
-func hLenHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hLenHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hlen" {
 		logger.Error("hLenHash: command Names is not hlen")
 		return resp.MakeErrorData("server error")
@@ -300,7 +300,7 @@ func hLenHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeIntData(int64(res))
 }
 
-func hMGetHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hMGetHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hmget" {
 		logger.Error("hMGetHash: command Names is not hmget")
 		return resp.MakeErrorData("server error")
@@ -339,7 +339,7 @@ func hMGetHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeArrayData(res)
 }
 
-func hSetHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hSetHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hset" {
 		logger.Error("hMSetHash: command Names is not hset")
 		return resp.MakeErrorData("server error")
@@ -375,7 +375,7 @@ func hSetHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeStringData("OK")
 }
 
-func hSetNxHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hSetNxHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hsetnx" {
 		logger.Error("hSetNxHash: command Names is not hsetnx")
 		return resp.MakeErrorData("server error")
@@ -414,7 +414,7 @@ func hSetNxHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp
 	return resp.MakeIntData(1)
 }
 
-func hValsHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hValsHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hvals" {
 		logger.Error("hValsHash: command Names is not hvals")
 		return resp.MakeErrorData("server error")
@@ -448,7 +448,7 @@ func hValsHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeArrayData(res)
 }
 
-func hStrLenHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hStrLenHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hstrlen" {
 		logger.Error("hStrLenHash: command Names is not hstrlen")
 		return resp.MakeErrorData("server error")
@@ -482,7 +482,7 @@ func hStrLenHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) res
 	return resp.MakeIntData(int64(res))
 }
 
-func hRandFieldHash(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func hRandFieldHash(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "hrandfield" {
 		logger.Error("hRandFieldHash: command Names is not hrandfield")
 		return resp.MakeErrorData("server error")

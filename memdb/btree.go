@@ -61,18 +61,18 @@ func (t *Btree[T]) NotEmpty() bool {
 	return t.root != nil
 }
 
-func (t *Btree[T]) balance() int64 {
-	if t.root != nil {
-		return balance(t.root)
-	}
-	return 0
-}
+// func (t *Btree[T]) balance() int64 {
+// 	if t.root != nil {
+// 		return balance(t.root)
+// 	}
+// 	return 0
+// }
 
 // Insert inserts a new value into the tree and returns the tree pointer
 func (t *Btree[T]) Insert(r T) bool {
 	nodeAdded := false
 	// do insertion, might change the structure of tree
-	t.root = insert[T](t.root, r, &nodeAdded, t)
+	t.root = insert(t.root, r, &nodeAdded, t)
 	if nodeAdded {
 		t.len++
 	}
@@ -236,7 +236,7 @@ func (t *Btree[T]) Tail() (T, error) {
 func (t *Btree[T]) Values() []map[string]float64 {
 	if t.values == nil {
 		t.values = make([]map[string]float64, 0)
-		t.Ascend(func(n *Node[T], i int) bool {
+		t.Ascend(func(n *Node[T], _ int) bool {
 			for name := range n.Value.GetNames() {
 				t.values = append(t.values, map[string]float64{name: n.Value.GetScore()})
 			}
@@ -403,7 +403,7 @@ func (t *Btree[T]) Debug() {
 		fmt.Println(t.Len(), "elements")
 	}
 
-	t.Ascend(func(n *Node[T], i int) bool {
+	t.Ascend(func(n *Node[T], _ int) bool {
 		if t.root.Value.Comp(n.Value) == 0 {
 			fmt.Print("ROOT ** ")
 		}

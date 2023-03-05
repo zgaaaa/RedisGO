@@ -13,7 +13,7 @@ import (
 )
 
 // rconf stands for raft configuration.
-func rconf(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func rconf(ctx context.Context, _ *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if len(cmd) < 3 {
 		return resp.MakeWrongNumberArgs("rconf")
 	}
@@ -42,9 +42,6 @@ func rconf(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.Redi
 	nodeID, err := strconv.ParseUint(string(cmd[2]), 10, 64)
 	if err != nil {
 		return resp.MakeErrorData("ERR value is not integer or out of range")
-	}
-	if nodeID < 0 {
-		return resp.MakeErrorData("ID should be a positive integer")
 	}
 	cc := raftpb.ConfChangeSingle{
 		Type:   actType,
@@ -78,7 +75,7 @@ func Member(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.Red
 }
 
 // MemberList implementing 'list' option of Member command
-func MemberList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func MemberList(_ context.Context, m *MemDb, _ [][]byte, _ net.Conn) resp.RedisData {
 	node := m.Raft
 	if node == nil {
 		return resp.MakeErrorData("raft node is not initialized. ")

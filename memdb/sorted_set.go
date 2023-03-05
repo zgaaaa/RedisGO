@@ -21,7 +21,7 @@ func reverse[S ~[]E, E any](s S) S {
 	return s
 }
 
-func zadd(ctx context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisData {
+func zadd(_ context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisData {
 	if len(cmd) < 4 {
 		return resp.MakeWrongNumberArgs("zadd")
 	}
@@ -52,7 +52,6 @@ func zadd(ctx context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisDat
 			incr = true
 		default:
 			endArgsFlag = true
-			break
 		}
 		if endArgsFlag {
 			break
@@ -161,7 +160,7 @@ func zadd(ctx context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisDat
 	return resp.MakeIntData(retInt)
 }
 
-func zrange(ctx context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisData {
+func zrange(_ context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisData {
 	if len(cmd) < 4 {
 		return resp.MakeWrongNumberArgs("zrange")
 	}
@@ -244,7 +243,7 @@ func zrange(ctx context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisD
 	// traverse btree for all elements , members are in ascend order
 	members := make([]*SortedSetMember, 0, NumOfMembers)
 	memberCount := -1 // current member index
-	sortedSet.Ascend(func(node *Node[*SortedSetNode], int2 int) bool {
+	sortedSet.Ascend(func(node *Node[*SortedSetNode], _ int) bool {
 		memberCount++
 		if memberCount < start {
 			return true
@@ -361,12 +360,12 @@ func zrange(ctx context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisD
 	}
 	//res = res[start:NumOfMembers]
 	if rev {
-		res = reverse[[]resp.RedisData](res)
+		res = reverse(res)
 	}
 	return resp.MakeArrayData(res)
 }
 
-func zrem(ctx context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisData {
+func zrem(_ context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisData {
 	if len(cmd) < 3 {
 		return resp.MakeWrongNumberArgs("zrem")
 	}
@@ -399,7 +398,7 @@ func zrem(ctx context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisDat
 
 }
 
-func zrank(ctx context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisData {
+func zrank(_ context.Context, m *MemDb, cmd cmdBytes, _ net.Conn) resp.RedisData {
 	if len(cmd) != 3 {
 		return resp.MakeWrongNumberArgs("zrank")
 	}

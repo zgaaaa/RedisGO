@@ -15,7 +15,7 @@ import (
 
 // keys.go file implements the keys commands of redis
 
-func delKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func delKey(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	cmdName := string(cmd[0])
 	if strings.ToLower(cmdName) != "del" {
 		logger.Error("delKey Function: cmdName is not del")
@@ -34,7 +34,7 @@ func delKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.Red
 	return resp.MakeIntData(int64(dKey))
 }
 
-func existsKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func existsKey(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	cmdName := string(cmd[0])
 	if strings.ToLower(cmdName) != "exists" || len(cmd) < 2 {
 		logger.Error("existsKey Function: cmdName is not exists or command args number is invalid")
@@ -55,7 +55,7 @@ func existsKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeIntData(int64(eKey))
 }
 
-func keysKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func keysKey(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "keys" || len(cmd) != 2 {
 		logger.Error("keysKey Function: cmdName is not keys or cmd length is not 2")
 		return resp.MakeErrorData(fmt.Sprintf("error: keys function get invalid command %s %s", string(cmd[0]), string(cmd[1])))
@@ -73,7 +73,7 @@ func keysKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.Re
 	return resp.MakeArrayData(res)
 }
 
-func expireKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func expireKey(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	cmdName := string(cmd[0])
 	if strings.ToLower(cmdName) != "expire" || len(cmd) < 3 || len(cmd) > 4 {
 		logger.Error("expireKey Function: cmdName is not expire or command args number is invalid")
@@ -125,7 +125,7 @@ func expireKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeIntData(int64(res))
 }
 
-func persistKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func persistKey(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	cmdName := string(cmd[0])
 	if strings.ToLower(cmdName) != "persist" || len(cmd) != 2 {
 		logger.Error("persistKey Function: cmdName is not persist or command args number is invalid")
@@ -142,7 +142,7 @@ func persistKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp
 	return resp.MakeIntData(int64(res))
 }
 
-func ttlKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func ttlKey(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	cmdName := string(cmd[0])
 	if strings.ToLower(cmdName) != "ttl" || len(cmd) != 2 {
 		logger.Error("ttlKey Function: cmdName is not ttl or command args number is invalid")
@@ -167,7 +167,7 @@ func ttlKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.Red
 	return resp.MakeIntData(ttl.(*TTLInfo).value - now)
 }
 
-func typeKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func typeKey(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	cmdName := string(cmd[0])
 	if strings.ToLower(cmdName) != "type" || len(cmd) != 2 {
 		logger.Error("typeKey Function: cmdName is not type or command args number is invalid")
@@ -200,7 +200,7 @@ func typeKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.Re
 	return resp.MakeErrorData("unknown error: server error")
 }
 
-func renameKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func renameKey(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	cmdName := string(cmd[0])
 	if strings.ToLower(cmdName) != "rename" || len(cmd) != 3 {
 		logger.Error("renameKey Function: cmdName is not rename or command args number is invalid")
@@ -227,7 +227,7 @@ func renameKey(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeStringData("OK")
 }
 
-func pingKeys(ctx context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
+func pingKeys(_ context.Context, _ *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if len(cmd) > 2 {
 		return resp.MakeErrorData("error: wrong number of arguments for 'ping' command")
 	}

@@ -47,7 +47,7 @@ func subscribe(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeArrayData(res)
 }
 
-func publish(ctx context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
+func publish(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if len(cmd) != 3 {
 		return resp.MakeWrongNumberArgs("publish")
 	}

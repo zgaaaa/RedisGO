@@ -16,7 +16,7 @@ import (
 
 // list.go file implements the list commands of redis
 
-func lLenList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lLenList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "llen" {
 		logger.Error("lLenList Function: cmdName is not llen")
 		return resp.MakeErrorData("server error")
@@ -48,7 +48,7 @@ func lLenList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeIntData(int64(typeV.Len))
 }
 
-func lIndexList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lIndexList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "lindex" {
 		logger.Error("lIndexList Function: cmdName is not lindex")
 		return resp.MakeErrorData("server error")
@@ -87,7 +87,7 @@ func lIndexList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp
 	return resp.MakeBulkData(resNode.Val)
 }
 
-func lPosList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lPosList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "lpos" {
 		logger.Error("lPosList Function: cmdName is not lpos")
 		return resp.MakeErrorData("server error")
@@ -278,7 +278,7 @@ func lPosList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeArrayData(res)
 }
 
-func lPopList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lPopList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if len(cmd) != 2 && len(cmd) != 3 {
 		return resp.MakeErrorData("wrong number of arguments for 'lpop' command")
 	}
@@ -337,7 +337,7 @@ func lPopList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeArrayData(res)
 }
 
-func rPopList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func rPopList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "rpop" {
 		logger.Error("rPopList: command is not rpop")
 		return resp.MakeErrorData("server error")
@@ -399,7 +399,7 @@ func rPopList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeArrayData(res)
 }
 
-func lPushList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lPushList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "lpush" {
 		logger.Error("lPushList Function : cmdName is not lpush")
 		return resp.MakeErrorData("Server Error")
@@ -435,7 +435,7 @@ func lPushList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeIntData(int64(list.Len))
 }
 
-func lPushXList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lPushXList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "lpushx" {
 		logger.Error("lPushXList Function : cmdName is not lpushx")
 		return resp.MakeErrorData("Server Error")
@@ -466,7 +466,7 @@ func lPushXList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp
 	return resp.MakeIntData(int64(list.Len))
 }
 
-func rPushList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func rPushList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "rpush" {
 		logger.Error("rPushList Function : cmdName is not rpush")
 		return resp.MakeErrorData("server error")
@@ -498,7 +498,7 @@ func rPushList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeIntData(int64(list.Len))
 }
 
-func rPushXList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func rPushXList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "rpushx" {
 		logger.Error("rPushXList Function : cmdName is not rpushx")
 		return resp.MakeErrorData("server error")
@@ -529,7 +529,7 @@ func rPushXList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp
 	return resp.MakeIntData(int64(list.Len))
 }
 
-func lSetList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lSetList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "lset" {
 		logger.Error("lSetList Function : cmdName is not lset")
 		return resp.MakeErrorData("server error")
@@ -569,7 +569,7 @@ func lSetList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeStringData("OK")
 }
 
-func lRemList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lRemList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "lrem" {
 		logger.Error("lRemList Function : cmdName is not lrem")
 		return resp.MakeErrorData("server error")
@@ -614,7 +614,7 @@ func lRemList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeIntData(int64(res))
 }
 
-func lTrimList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lTrimList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "ltrim" {
 		logger.Error("lTrimList Function : cmdName is not ltrim")
 		return resp.MakeErrorData("server error")
@@ -656,7 +656,7 @@ func lTrimList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeStringData("OK")
 }
 
-func lRangeList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lRangeList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "lrange" {
 		logger.Error("lRangeList Function : cmdName is not lrange")
 		return resp.MakeErrorData("server error")
@@ -701,7 +701,7 @@ func lRangeList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp
 	return resp.MakeArrayData(res)
 }
 
-func lMoveList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func lMoveList(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "lmove" {
 		logger.Error("lMoveList Function : cmdName is not lmove")
 		return resp.MakeErrorData("server error")
@@ -779,7 +779,7 @@ func lMoveList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeBulkData(popElem.Val)
 }
 
-func blPopList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func blPopList(ctx context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	// at least 3 args like "BLPOP key timeout"
 	if len(cmd) < 3 {
 		return resp.MakeErrorData("ERR wrong number of arguments for 'blpop' command")
@@ -787,7 +787,7 @@ func blPopList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return bXPopList(ctx, m, cmd, "left")
 }
 
-func brPopList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func brPopList(ctx context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	// at least 3 args like "BLPOP key timeout"
 	if len(cmd) < 3 {
 		return resp.MakeErrorData("ERR wrong number of arguments for 'blpop' command")
@@ -795,7 +795,7 @@ func brPopList(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return bXPopList(ctx, m, cmd, "right")
 }
 
-func bXPopList(ctx context.Context, m *MemDb, cmd [][]byte, direction string) resp.RedisData {
+func bXPopList(_ context.Context, m *MemDb, cmd [][]byte, direction string) resp.RedisData {
 
 	// last arg is block timeout
 	timeout, err := strconv.Atoi(string(cmd[len(cmd)-1]))

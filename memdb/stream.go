@@ -9,7 +9,7 @@ import (
 	"github.com/innovationb1ue/RedisGO/resp"
 )
 
-func xadd(ctx context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
+func xadd(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if len(cmd) < 5 {
 		return resp.MakeWrongNumberArgs("xadd")
 	}
@@ -115,7 +115,6 @@ func xadd(ctx context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisDat
 			}
 			isDone = true
 			idx++
-			break
 		}
 		// break out of infinite for loop
 		if isDone {
@@ -186,14 +185,14 @@ func xadd(ctx context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisDat
 			}
 		}
 	}
-	if wave {
-		// nearly exact trimming is not useful in our implement.
-		// We will always perform a exact trim now.
-	}
+	// if wave {
+	// 	// nearly exact trimming is not useful in our implement.
+	// 	// We will always perform a exact trim now.
+	// }
 	return resp.MakeBulkData(resp.MakeStringData(ID.Format()).ByteData())
 }
 
-func xrange(ctx context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
+func xrange(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if len(cmd) < 4 {
 		return resp.MakeWrongNumberArgs("xrange")
 	}

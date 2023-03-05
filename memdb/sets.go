@@ -11,7 +11,7 @@ import (
 	"github.com/innovationb1ue/RedisGO/resp"
 )
 
-func sAddSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sAddSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if len(cmd) < 3 {
 		return resp.MakeErrorData("wrong number of arguments for 'sadd' command")
 	}
@@ -40,7 +40,7 @@ func sAddSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.Re
 	return resp.MakeIntData(int64(res))
 }
 
-func sCardSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sCardSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "scard" {
 		logger.Error("sCardSet Function: cmdName is not scard")
 		return resp.MakeErrorData("server error")
@@ -71,7 +71,7 @@ func sCardSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeIntData(int64(res))
 }
 
-func sDiffSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sDiffSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "sdiff" {
 		logger.Error("sDiffSet Function: cmdName is not sdiff")
 		return resp.MakeErrorData("server error")
@@ -131,7 +131,7 @@ func sDiffSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeArrayData(res)
 }
 
-func sDiffStoreSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sDiffStoreSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "sdiffstore" {
 		logger.Error("sDiffStoreSet Function: cmdName is not sdiffstore")
 		return resp.MakeErrorData("server error")
@@ -210,7 +210,7 @@ func sDiffStoreSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) r
 	return resp.MakeIntData(int64(diffRes.Len()))
 }
 
-func sInterSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sInterSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "sinter" {
 		logger.Error("sInterSet Function: cmdName is not sinter")
 		return resp.MakeErrorData("server error")
@@ -263,7 +263,7 @@ func sInterSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeArrayData(res)
 }
 
-func sInterStoreSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sInterStoreSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "sinterstore" {
 		logger.Error("sInterStoreSet Function: cmdName is not sinterstore")
 		return resp.MakeErrorData("server error")
@@ -341,7 +341,7 @@ func sInterStoreSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) 
 	return resp.MakeIntData(int64(interSet.Len()))
 }
 
-func sIsMemberSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sIsMemberSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "sismember" {
 		logger.Error("sIsMemberSet Function: cmdName is not sismember")
 		return resp.MakeErrorData("server error")
@@ -375,7 +375,7 @@ func sIsMemberSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) re
 	return resp.MakeIntData(0)
 }
 
-func sMembersSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sMembersSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if len(cmd) != 2 {
 		return resp.MakeErrorData("wrong number of arguments for 'smembers' command")
 	}
@@ -405,7 +405,7 @@ func sMembersSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) res
 	return resp.MakeArrayData(res)
 }
 
-func sMoveSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sMoveSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if len(cmd) != 4 {
 		return resp.MakeErrorData("wrong number of arguments for 'smove' command")
 	}
@@ -459,7 +459,7 @@ func sMoveSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.R
 	return resp.MakeIntData(1)
 }
 
-func sPopSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sPopSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "spop" {
 		logger.Error("sPopSet Function: cmdName is not spop")
 		return resp.MakeErrorData("server error")
@@ -525,7 +525,7 @@ func sPopSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.Re
 	return resp.MakeArrayData(res)
 }
 
-func sRandMemberSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sRandMemberSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 
 	if len(cmd) != 2 && len(cmd) != 3 {
 		return resp.MakeErrorData("wrong number of arguments for 'srandmember' command")
@@ -574,7 +574,7 @@ func sRandMemberSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) 
 	return resp.MakeArrayData(res)
 }
 
-func sRemSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sRemSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "srem" {
 		logger.Error("sRemSet Function: cmdName is not srem")
 		return resp.MakeErrorData("server error")
@@ -619,7 +619,7 @@ func sRemSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.Re
 	return resp.MakeIntData(int64(res))
 }
 
-func sUnionSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sUnionSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "sunion" {
 		logger.Error("sUnionSet Function: cmdName is not sunion")
 		return resp.MakeErrorData("server error")
@@ -670,7 +670,7 @@ func sUnionSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.
 	return resp.MakeArrayData(res)
 }
 
-func sUnionStoreSet(ctx context.Context, m *MemDb, cmd [][]byte, conn net.Conn) resp.RedisData {
+func sUnionStoreSet(_ context.Context, m *MemDb, cmd [][]byte, _ net.Conn) resp.RedisData {
 	if strings.ToLower(string(cmd[0])) != "sunionstore" {
 		logger.Error("sUnionStoreSet Function: cmdName is not sunionstore")
 		return resp.MakeErrorData("server error")
